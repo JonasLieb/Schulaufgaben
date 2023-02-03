@@ -1,0 +1,3 @@
+Methoden:
+- Parameter
+-- Parameter sind besondere Variablen, welche einer Methode übergeben werden
