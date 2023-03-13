@@ -2,15 +2,12 @@ package ls02.aufgaben.arrays.zusatzaufgabe;
 
 import ls02.aufgaben.arrays.zusatzaufgabe.util.swing.CellPanel;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 
 public class GameOfLife extends JFrame {
