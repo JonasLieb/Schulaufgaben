@@ -14,6 +14,7 @@ public class FigurenFactory {
             double seitenlaenge3 = -1; //TODO
             return new Dreieck(seitenlaenge1, seitenlaenge2, seitenlaenge3);
         }
+        return null;
     }
 
 }
