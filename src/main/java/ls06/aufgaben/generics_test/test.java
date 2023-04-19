@@ -33,6 +33,7 @@ public class test {
         }
 
 
+// Not Compilable
 //        ArrayList<Employee> arrListMitarbeiter = new ArrayList<ShiftWorker>();//BueroArbeiter, SchichtArbeiter und Managers hinzufügen
 //        try {
 //            arrListMitarbeiter.add(officeWorker);
@@ -68,7 +69,7 @@ public class test {
             e.printStackTrace();
         }
 
-
+// Not Compilable
 //        LinkedList<OfficeWorker> liliBueroArbeiter = new LinkedList<Manager>(); //BueroArbeiter und Managers hinzufügen
 //        try {
 //            liliBueroArbeiter.add(officeWorker);

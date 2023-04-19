@@ -1,4 +1,4 @@
-package ls06.aufgaben.figuren_generics.figuren3d;
+package ls07.aufgaben.figuren_factories.figuren3d;
 
 public class Kugel extends Figur3D {
 
