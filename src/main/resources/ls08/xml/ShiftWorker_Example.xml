@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ShiftWorker>
+    <!-- fester part... -->
+    <ID>3022</ID>
+    <Name>Hans Müller</Name>
+    <!-- variabler part... -->
+    <hourlywage>14</hourlywage>
+    <hours>5</hours>
+</ShiftWorker>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Manager>
+    <!-- fester part... -->
+    <ID>5055</ID>
+    <Name>Hans Müller</Name>
+    <!-- variabler part... -->
+    <fixSalary>2000</fixSalary>
+    <percentage>0.5</percentage>
+</Manager>

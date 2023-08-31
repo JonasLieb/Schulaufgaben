@@ -1,8 +1,8 @@
-package ls05.aufgaben.mitarbeiter.employee;
+package ls07.aufgaben.mitarbeiter_csv.employee;
 
 
-import ls05.aufgaben.mitarbeiter.util.MitarbeiterType;
-import ls05.aufgaben.mitarbeiter.util.exceptions.MissingArgumentException;
+import ls07.aufgaben.mitarbeiter_csv.util.MitarbeiterType;
+import ls07.aufgaben.mitarbeiter_csv.util.exceptions.MissingArgumentException;
 
 public class ShiftWorker extends Employee {
     /**
@@ -74,14 +74,6 @@ public class ShiftWorker extends Employee {
         setHourCount(this.hourCount + anzahlStunden);
     }
 
-    public double getHourlyRate() {
-        return hourlyRate;
-    }
-
-    public int getHourCount() {
-        return hourCount;
-    }
-
     @Override
     public MitarbeiterType getType() {
         return MitarbeiterType.SHIFT_WORKER;
@@ -95,5 +87,18 @@ public class ShiftWorker extends Employee {
     @Override
     protected int getMaxID() {
         return MAX_ID;
+    }
+
+    @Override
+    protected String getCSVString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getCSVString(this));
+        sb.append(COLUMN_DELIMITER);
+        sb.append(getCSVString(getName()));
+        sb.append(COLUMN_DELIMITER);
+        sb.append(getCSVString(getId()));
+        sb.append(COLUMN_DELIMITER);
+        sb.append(getCSVString(hourlyRate));
+        return sb.toString();
     }
 }

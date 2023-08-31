@@ -1,7 +1,9 @@
-package ls05.aufgaben.mitarbeiter.employee;
+package ls07.aufgaben.mitarbeiter_csv.employee;
 
-import ls05.aufgaben.mitarbeiter.util.MitarbeiterType;
-import ls05.aufgaben.mitarbeiter.util.exceptions.MissingArgumentException;
+import ls07.aufgaben.mitarbeiter_csv.util.MitarbeiterType;
+import ls07.aufgaben.mitarbeiter_csv.util.exceptions.MissingArgumentException;
+
+import java.io.FileWriter;
 
 public class Manager extends OfficeWorker {
     /**
@@ -56,10 +58,6 @@ public class Manager extends OfficeWorker {
         return fixSalary + fixSalary * percentage;
     }
 
-    public double getPercentage(){
-        return percentage;
-    }
-
     @Override
     public MitarbeiterType getType() {
         return MitarbeiterType.MANAGER;
@@ -73,5 +71,21 @@ public class Manager extends OfficeWorker {
     @Override
     protected int getMaxID() {
         return MAX_ID;
+    }
+
+
+    @Override
+    protected String getCSVString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getCSVString(this));
+        sb.append(COLUMN_DELIMITER);
+        sb.append(getCSVString(getName()));
+        sb.append(COLUMN_DELIMITER);
+        sb.append(getCSVString(getId()));
+        sb.append(COLUMN_DELIMITER);
+        sb.append(getCSVString(fixSalary));
+        sb.append(COLUMN_DELIMITER);
+        sb.append(getCSVString(percentage));
+        return sb.toString();
     }
 }

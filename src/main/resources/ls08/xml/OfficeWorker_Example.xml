@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeWorker>
+    <!-- fester part... -->
+    <ID>5201</ID>
+    <Name>Hans Müller</Name>
+    <!-- variabler part... -->
+    <fixSalary>2000.00</fixSalary>
+</OfficeWorker>

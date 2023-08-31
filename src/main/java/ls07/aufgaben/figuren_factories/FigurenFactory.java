@@ -1,60 +1,43 @@
 package ls07.aufgaben.figuren_factories;
 
-import ls07.aufgaben.figuren_factories.figuren2d.*;
+import ls07.aufgaben.figuren_factories.figuren2d.Figur2D;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Constructor;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class FigurenFactory {
 
-    public static Figur2D getFigur2D(Class<Figur2D> clazz) {
-        if (clazz == null)
-            return null;
-        if (Achteck.class.equals(clazz)) {
-            double seitenlaenge = -1; //TODO: ermitteln
-            return new Achteck(seitenlaenge);
-        } else if (Dreieck.class.equals(clazz)) {
-            double s1 = -1; //TODO: ermitteln
-            double s2 = -1; //TODO: ermitteln
-            double s3 = -1; //TODO: ermitteln
-            return new Dreieck(s1, s2, s3);
-        } else if (Kreis.class.equals(clazz)) {
-            double radius = -1; //TODO: ermitteln
-            return new Kreis(radius);
-        } else if (NEck.class.equals(clazz)) {
-            int seitenAnzahl = -1; //TODO: ermitteln
-            double seitenlaenge = -1; //TODO: ermitteln
-            return new NEck(seitenAnzahl, seitenlaenge);
-        } else if (Rechteck.class.equals(clazz)) {
-            double s1 = -1; //TODO: ermitteln
-            double s2 = -1; //TODO: ermitteln
-            return new Rechteck(s1, s2);
-        } else if (Sechseck.class.equals(clazz)) {
-            double seitenlaenge = -1; //TODO: ermitteln
-            return new Sechseck(seitenlaenge);
-        } else {
-            throw new IllegalArgumentException("Die Klasse clazz ist keine bekannte Figur2D");
-        }
-    }
+    private static final char COLUMN_DELIMITER = ';';
 
-    public static List<Figur2D> reflectFigures(File f) throws FileNotFoundException {
-        List<Figur2D> figuren = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(f));
-        reader.lines().forEach(line -> {
-            Figur2D fig = reflect(line);
-            if (fig != null)
-                figuren.add(fig);
-        });
-        return figuren;
-    }
+//    public static Figur2D getFigur2D(String fromLine) throws ClassNotFoundException {
+//        String[] cols = fromLine.split(String.valueOf(COLUMN_DELIMITER));
+//        if (cols.length < 2)
+//            throw new IllegalArgumentException("Mitgegebene Zeile hat nicht ausreichend viele parameter");
+//
+//        String classPathAndName = cols[0];
+//        Class<Figur2D> clazz = (Class<Figur2D>) Class.forName(classPathAndName);
+//
+//        String[] values = new String[cols.length - 1];
+//        System.arraycopy(cols, 1, values, 0, cols.length - 1);
+//        return reflect(clazz, values);
+//    }
 
-
-    public static Figur2D reflect(String csvLine) {
-        //TODO
-    }
+//    public static <T extends Figur2D> T reflect(Class<T> clazz, String[] vals) {
+//        //Richtigen Konstruktor ermitteln
+//        Constructor<?>[] Constructors = clazz.getConstructors();
+//        int num;
+//        try {
+//            num = Integer.parseInt(vals[0]);
+//        } catch (NumberFormatException e) {
+//            throw new IllegalArgumentException("Der Index des zu nutzende Konstruktors ist nicht definiert: " + vals[0])
+//        }
+//        Object[] parms = new Object[vals.length - 1];
+//
+//        //parms abhängig von dem ausgefehlten Konstruktor füllen
+//
+//
+//        Constructors[num].newInstance()
+//    }
 
 }

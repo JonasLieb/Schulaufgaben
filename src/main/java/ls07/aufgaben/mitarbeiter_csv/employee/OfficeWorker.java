@@ -1,6 +1,6 @@
-package ls05.aufgaben.mitarbeiter.employee;
+package ls07.aufgaben.mitarbeiter_csv.employee;
 
-import ls05.aufgaben.mitarbeiter.util.MitarbeiterType;
+import ls07.aufgaben.mitarbeiter_csv.util.MitarbeiterType;
 
 public class OfficeWorker extends Employee {
     // Laut der Regel "muss mit 5 beginnen" w�re hier auch MIN_ID = 5000 m�glich. Da
@@ -61,10 +61,6 @@ public class OfficeWorker extends Employee {
         return fixSalary;
     }
 
-    public double getSalary() {
-        return fixSalary;
-    }
-
     @Override
     public MitarbeiterType getType() {
         return MitarbeiterType.OFFICE_WORKER;
@@ -78,5 +74,18 @@ public class OfficeWorker extends Employee {
     @Override
     protected int getMaxID() {
         return MAX_ID;
+    }
+
+    @Override
+    protected String getCSVString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getCSVString(this));
+        sb.append(COLUMN_DELIMITER);
+        sb.append(getCSVString(getName()));
+        sb.append(COLUMN_DELIMITER);
+        sb.append(getCSVString(getId()));
+        sb.append(COLUMN_DELIMITER);
+        sb.append(getCSVString(fixSalary));
+        return sb.toString();
     }
 }
