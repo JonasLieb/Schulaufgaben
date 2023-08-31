@@ -55,6 +55,14 @@ public class BusinessManagement {
         }
     }
 
+    public ArrayList<Employee> getEmployees(){
+        return employees;
+    }
+
+    public ArrayList<ShiftWorker> getShiftWorkers(){
+        return shiftWorkers;
+    }
+
     public void workOneDay() {
         for (ShiftWorker worker : shiftWorkers) {
             worker.work(8);
