@@ -15,10 +15,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class VerwaltungsGUI extends JFrame {
-    private final List<Employee> employees = new ArrayList<Employee>();
+
+    private static final String TITLE = "Mitarbeiterverwaltung";
+
+    private EmployeeManagement management = new EmployeeManagement();
     private EmployeeTable<Employee> allEmployeesTable;
     private EmployeeTable<ShiftWorker> allShiftWorkersTable;
-
 
     public static void main(String[] args) {
         VerwaltungsGUI gui = new VerwaltungsGUI();
@@ -26,9 +28,19 @@ public class VerwaltungsGUI extends JFrame {
     }
 
     public VerwaltungsGUI() {
+        this(new EmployeeManagement());
+    }
+
+    public VerwaltungsGUI(EmployeeManagement management) {
         FlatDarkLaf.setup();
+        setManagement(management);
         initGUI();
         pack();
+    }
+
+    private void setManagement(EmployeeManagement management) {
+        if (management == null) this.management = new EmployeeManagement();
+        else this.management = management;
     }
 
     private void initGUI() {
@@ -39,6 +51,7 @@ public class VerwaltungsGUI extends JFrame {
         this.add(mainPanel);
         this.setMinimumSize(new Dimension(500, 400));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setTitle(TITLE);
     }
 
     private JPanel getManagePanel() {
@@ -72,17 +85,15 @@ public class VerwaltungsGUI extends JFrame {
         JTabbedPane tabbedPane = new JTabbedPane();
 
         allEmployeesTable = new EmployeeTable<>(Employee.class);
-        allEmployeesTable.setData(employees);
+        allEmployeesTable.setData(management.getEmployees());
 
         allShiftWorkersTable = new EmployeeTable<>(ShiftWorker.class);
         List<ShiftWorker> shiftWorkers = new ArrayList<>();
-        employees.stream().filter(e -> e instanceof ShiftWorker).map(e -> (ShiftWorker) e).forEach(shiftWorkers::add);
+        management.getEmployees().stream().filter(e -> e instanceof ShiftWorker).map(e -> (ShiftWorker) e).forEach(shiftWorkers::add);
         allShiftWorkersTable.setData(shiftWorkers);
 
-        //TODO
-
-        tabbedPane.addTab("Mitarbeiter", allEmployeesTable);
-        tabbedPane.addTab("Schichtarbeiter", allShiftWorkersTable);
+        tabbedPane.addTab("Mitarbeiter", new JScrollPane(allEmployeesTable));
+        tabbedPane.addTab("Schichtarbeiter", new JScrollPane(allShiftWorkersTable));
         return tabbedPane;
     }
 
@@ -92,8 +103,8 @@ public class VerwaltungsGUI extends JFrame {
 
         Manager m = new Manager("Peter", 5001, 5000, .05);
         ShiftWorker w = new ShiftWorker("Shifto", 3001, 20);
-        employees.add(m);
-        employees.add(w);
+        management.getEmployees().add(m);
+        management.getEmployees().add(w);
 
 
         updateGUI();
@@ -105,14 +116,11 @@ public class VerwaltungsGUI extends JFrame {
     }
 
     private void updateGUI() {
-        allEmployeesTable.setData(employees);
+        allEmployeesTable.setData(management.getEmployees());
 
         List<ShiftWorker> shiftWorkers = new ArrayList<>();
-        employees.stream().filter(e -> e instanceof ShiftWorker).map(e -> (ShiftWorker) e).forEach(shiftWorkers::add);
-
+        management.getEmployees().stream().filter(e -> e instanceof ShiftWorker).map(e -> (ShiftWorker) e).forEach(shiftWorkers::add);
         allShiftWorkersTable.setData(shiftWorkers);
-//        management.getEmployees().stream().map(e -> new String[]{String.valueOf(e.getId()), e.getName()}).forEach(allEmployeesModel::addRow);
-//        management.getShiftWorkers().stream().map(e -> new String[]{String.valueOf(e.getId()), e.getName(), String.valueOf(e.income())}).forEach(allShiftWorkersModel::addRow);
 
         revalidate();
     }

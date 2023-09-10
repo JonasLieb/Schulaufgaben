@@ -5,7 +5,9 @@ import ls07.aufgaben.mitarbeiter_csv.employee.Employee;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +24,8 @@ public class EmployeeTable<T extends Employee> extends JTable {
     }
 
     private void initGUI() {
-        Field[] declaredFields = persistentClass.getDeclaredFields();
+        Field[] declaredFields = getNonConstantEmployeeFields(persistentClass);
+
         String[] headers = new String[declaredFields.length];
         for (int i = 0; i < headers.length; i++) {
             headers[i] = declaredFields[i].getName();
@@ -36,13 +39,11 @@ public class EmployeeTable<T extends Employee> extends JTable {
         this.removeAll();
         final DefaultTableModel model = (DefaultTableModel) this.getModel();
 
-
-        Field[] declaredFields = persistentClass.getDeclaredFields();
-        Object[][] data = new Object[currentEmployeeList.size()][];
+        Field[] declaredFields = getNonConstantEmployeeFields(persistentClass);
 
         currentEmployeeList.stream().map(empl -> {
             Object[] rowData = new Object[declaredFields.length];
-            for(int col = 0; col < rowData.length; col++){
+            for (int col = 0; col < rowData.length; col++) {
                 declaredFields[col].setAccessible(true);
                 Object value;
                 try {
@@ -54,24 +55,6 @@ public class EmployeeTable<T extends Employee> extends JTable {
             }
             return rowData;
         }).forEach(model::addRow);
-
-//        for (int i = 0; i < currentEmployeeList.size(); i++) {
-//            Object[] arr = new Object[declaredFields.length];
-//            for (int j = 0; j < arr.length; j++) {
-//                T t = currentEmployeeList.get(j);
-//                declaredFields[j].setAccessible(true);
-//                Object value;
-//                try {
-//                    value = declaredFields[j].get(t);
-//                } catch (IllegalAccessException e) {
-//                    value = "/";
-//                }
-//                arr[j] = value;
-//            }
-//            data[i] = arr;
-//        }
-//
-//        Arrays.stream(data).forEach(model::addRow);
         revalidate();
     }
 
@@ -98,5 +81,44 @@ public class EmployeeTable<T extends Employee> extends JTable {
                 return false;
             }
         };
+    }
+
+    private static Field[] getNonConstantEmployeeFields(Class<?> persistentClass) {
+        return getNonConstantEmployeeFieldsRecursiv(persistentClass);
+    }
+
+    private static Field[] getNonConstantEmployeeFieldsRecursiv(Class<?> currentClass){
+        //1. bin ich noch eine passende Klasse? Falls nein return
+        if(! Employee.class.isAssignableFrom(currentClass)) return null;
+
+        //2. Ich bin eine passende Klasse -> Felder der höheren Klassen holen, meine anhängen
+        Class<?> parent = currentClass.getSuperclass();
+        Field[] additionalFields = (parent == null) ? null : getNonConstantEmployeeFieldsRecursiv(parent);
+        Field[] myFields = Arrays.stream(currentClass.getDeclaredFields()).filter(EmployeeTable::isNotStaticFinal).toArray(Field[]::new);
+        return concatenate(additionalFields, myFields);
+    }
+
+    private static <T> T[] concatenate(T[] a, T[] b) {
+        if(a == null && b == null)return null;
+        else if(a == null) return b;
+        else if(b == null) return a;
+
+        int aLen = a.length;
+        int bLen = b.length;
+        @SuppressWarnings("unchecked")
+        T[] c = (T[]) Array.newInstance(a.getClass().getComponentType(), aLen + bLen);
+        System.arraycopy(a, 0, c, 0, aLen);
+        System.arraycopy(b, 0, c, aLen, bLen);
+        return c;
+    }
+
+    private static boolean isNotStaticFinal(Field field) {
+        return !isStaticFinal(field);
+    }
+
+    private static boolean isStaticFinal(Field field) {
+        int modifiers = field.getModifiers();
+        return (Modifier.isStatic(modifiers) && Modifier
+                .isFinal(modifiers));
     }
 }
