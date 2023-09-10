@@ -1,17 +1,15 @@
-package ls07.aufgaben.mitarbeiter_csv.util;
+package ls11.aufgaben.mitarbeitergui.util.swing;
 
-import ls07.aufgaben.mitarbeiter_csv.employee.Employee;
+
+import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.employee.Employee;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class EmployeeTable<T extends Employee> extends JTable {

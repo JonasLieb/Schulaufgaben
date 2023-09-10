@@ -1,22 +1,22 @@
-package ls11.mitarbeitergui;
+package ls11.aufgaben.mitarbeitergui;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import ls07.aufgaben.mitarbeiter_csv.employee.Employee;
-import ls07.aufgaben.mitarbeiter_csv.employee.Manager;
-import ls07.aufgaben.mitarbeiter_csv.employee.ShiftWorker;
-import ls07.aufgaben.mitarbeiter_csv.util.EmployeeTable;
+import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.employee.Employee;
+import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.employee.Manager;
+import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.employee.OfficeWorker;
+import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.employee.ShiftWorker;
+import ls11.aufgaben.mitarbeitergui.util.swing.CreateEmployeeDialog;
+import ls11.aufgaben.mitarbeitergui.util.swing.EmployeeTable;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class VerwaltungsGUI extends JFrame {
 
     private static final String TITLE = "Mitarbeiterverwaltung";
+    private static final Class<? extends Employee>[] VALID_EMPLOYEES = (Class<? extends Employee>[]) new Class<?>[]{ShiftWorker.class, Manager.class, OfficeWorker.class};
 
     private EmployeeManagement management = new EmployeeManagement();
     private EmployeeTable<Employee> allEmployeesTable;
@@ -98,15 +98,11 @@ public class VerwaltungsGUI extends JFrame {
     }
 
     private void addEmployee() {
-        //TODO
-        System.out.println("Todo...");
+        CreateEmployeeDialog.showCreateEmployeePane(this, VALID_EMPLOYEES);
+    }
 
-        Manager m = new Manager("Peter", 5001, 5000, .05);
-        ShiftWorker w = new ShiftWorker("Shifto", 3001, 20);
-        management.getEmployees().add(m);
-        management.getEmployees().add(w);
-
-
+    public void addEmployee(Employee e) {
+        management.addEmployee(e);
         updateGUI();
     }
 

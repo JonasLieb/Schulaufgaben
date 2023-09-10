@@ -1,8 +1,8 @@
-package ls11.mitarbeitergui;
+package ls11.aufgaben.mitarbeitergui;
 
-import ls07.aufgaben.mitarbeiter_csv.Departement;
-import ls07.aufgaben.mitarbeiter_csv.employee.Employee;
-import ls07.aufgaben.mitarbeiter_csv.employee.ShiftWorker;
+
+import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.employee.Employee;
+import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.employee.ShiftWorker;
 
 import java.util.ArrayList;
 
@@ -11,14 +11,13 @@ public class EmployeeManagement {
     ArrayList<ShiftWorker> shiftWorkers = new ArrayList<>();
 
 
-    public void addEmployee(Employee employee, Departement departement) {
+    public void addEmployee(Employee employee) {
         if (!employees.contains(employee)) {
             employees.add(employee);
         }
         if (employee instanceof ShiftWorker && !shiftWorkers.contains(employee)) {
             shiftWorkers.add((ShiftWorker) employee);
         }
-        departement.add(employee);
     }
 
     public void removeEmployee(Employee employee) {

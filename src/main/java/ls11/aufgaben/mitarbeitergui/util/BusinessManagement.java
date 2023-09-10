@@ -1,4 +1,4 @@
-package ls11.mitarbeitergui.util;
+package ls11.aufgaben.mitarbeitergui.util;
 
 import ls07.aufgaben.mitarbeiter_csv.Departement;
 import ls07.aufgaben.mitarbeiter_csv.employee.Employee;
