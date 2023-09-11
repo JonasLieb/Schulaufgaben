@@ -2,6 +2,7 @@ package ls11.aufgaben.mitarbeitergui.util.swing;
 
 
 import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.employee.Employee;
+import ls11.aufgaben.mitarbeitergui.util.EmployeeUtils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -22,7 +23,7 @@ public class EmployeeTable<T extends Employee> extends JTable {
     }
 
     private void initGUI() {
-        Field[] declaredFields = getNonConstantEmployeeFields(persistentClass);
+        Field[] declaredFields = EmployeeUtils.getNonConstantEmployeeFields(persistentClass);
 
         String[] headers = new String[declaredFields.length];
         for (int i = 0; i < headers.length; i++) {
@@ -37,7 +38,7 @@ public class EmployeeTable<T extends Employee> extends JTable {
         this.removeAll();
         final DefaultTableModel model = (DefaultTableModel) this.getModel();
 
-        Field[] declaredFields = getNonConstantEmployeeFields(persistentClass);
+        Field[] declaredFields = EmployeeUtils.getNonConstantEmployeeFields(persistentClass);
 
         currentEmployeeList.stream().map(empl -> {
             Object[] rowData = new Object[declaredFields.length];
@@ -79,44 +80,5 @@ public class EmployeeTable<T extends Employee> extends JTable {
                 return false;
             }
         };
-    }
-
-    private static Field[] getNonConstantEmployeeFields(Class<?> persistentClass) {
-        return getNonConstantEmployeeFieldsRecursiv(persistentClass);
-    }
-
-    private static Field[] getNonConstantEmployeeFieldsRecursiv(Class<?> currentClass){
-        //1. bin ich noch eine passende Klasse? Falls nein return
-        if(! Employee.class.isAssignableFrom(currentClass)) return null;
-
-        //2. Ich bin eine passende Klasse -> Felder der höheren Klassen holen, meine anhängen
-        Class<?> parent = currentClass.getSuperclass();
-        Field[] additionalFields = (parent == null) ? null : getNonConstantEmployeeFieldsRecursiv(parent);
-        Field[] myFields = Arrays.stream(currentClass.getDeclaredFields()).filter(EmployeeTable::isNotStaticFinal).toArray(Field[]::new);
-        return concatenate(additionalFields, myFields);
-    }
-
-    private static <T> T[] concatenate(T[] a, T[] b) {
-        if(a == null && b == null)return null;
-        else if(a == null) return b;
-        else if(b == null) return a;
-
-        int aLen = a.length;
-        int bLen = b.length;
-        @SuppressWarnings("unchecked")
-        T[] c = (T[]) Array.newInstance(a.getClass().getComponentType(), aLen + bLen);
-        System.arraycopy(a, 0, c, 0, aLen);
-        System.arraycopy(b, 0, c, aLen, bLen);
-        return c;
-    }
-
-    private static boolean isNotStaticFinal(Field field) {
-        return !isStaticFinal(field);
-    }
-
-    private static boolean isStaticFinal(Field field) {
-        int modifiers = field.getModifiers();
-        return (Modifier.isStatic(modifiers) && Modifier
-                .isFinal(modifiers));
     }
 }

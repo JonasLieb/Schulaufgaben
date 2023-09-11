@@ -23,7 +23,7 @@ public class ShiftWorker extends Employee {
      */
     private int hourCount;
 
-    @EmployeeDialogCreatable
+    @EmployeeDialogCreatable(parameterNames = {"Name", "ID", "Stundensatz"})
     public ShiftWorker(String name, int id, double hourlyRate) {
         setName(name);
         setHourlyRate(hourlyRate);

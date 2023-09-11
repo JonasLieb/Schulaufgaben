@@ -18,7 +18,7 @@ public class Manager extends OfficeWorker {
      */
     private double percentage = -1;
 
-    @EmployeeDialogCreatable
+    @EmployeeDialogCreatable(parameterNames = {"Name", "ID", "Festgehalt", "Prozentsatz"})
     public Manager(String name, int id, double festgehalt, double prozentsatz) {
         super(name, id, festgehalt);
         setPercentage(prozentsatz);

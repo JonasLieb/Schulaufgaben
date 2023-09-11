@@ -24,7 +24,7 @@ public class OfficeWorker extends Employee {
      */
     protected double fixSalary = -1;
 
-    @EmployeeDialogCreatable
+    @EmployeeDialogCreatable(parameterNames = {"Name", "ID", "Festgehalt"})
     public OfficeWorker(String name, int id, double festgehalt) {
         setName(name);
         setFestgehalt(festgehalt);
