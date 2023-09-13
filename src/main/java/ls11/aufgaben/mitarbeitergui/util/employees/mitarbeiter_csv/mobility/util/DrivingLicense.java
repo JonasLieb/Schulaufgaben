@@ -1,4 +1,6 @@
-package ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.mobility.util;
+package ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.mobility.util;
+
+import java.util.Arrays;
 
 public class DrivingLicense {
 	private char[] types;
@@ -21,5 +23,9 @@ public class DrivingLicense {
 			if (type.isValidType(c))
 				return true;
 		return false;
+	}
+
+	public String toString(){
+		return Arrays.toString(types);
 	}
 }

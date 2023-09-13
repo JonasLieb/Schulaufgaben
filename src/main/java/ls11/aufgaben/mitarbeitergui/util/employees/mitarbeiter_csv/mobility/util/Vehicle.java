@@ -1,7 +1,7 @@
-package ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.mobility.util;
+package ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.mobility.util;
 
 
-import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.mobility.Driver;
+import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.employee.Driver;
 
 public abstract class Vehicle {
     // 'final'

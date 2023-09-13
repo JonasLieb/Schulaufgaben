@@ -1,9 +1,12 @@
-package ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.employee;
+package ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.employee;
 
-import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.util.MitarbeiterType;
-import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.util.exceptions.MissingArgumentException;
-import ls11.aufgaben.mitarbeitergui.util.swing.EmployeeDialogCreatable;
+import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.util.MitarbeiterType;
+import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.util.exceptions.MissingArgumentException;
+import ls11.aufgaben.mitarbeitergui.util.annotations.ClassName;
+import ls11.aufgaben.mitarbeitergui.util.annotations.EmployeeDialogCreatable;
+import ls11.aufgaben.mitarbeitergui.util.annotations.ParameterName;
 
+@ClassName(name = "Manager")
 public class Manager extends OfficeWorker {
     /**
      * Unteres Limit des zul�ssigen ID-Bereichs
@@ -16,12 +19,17 @@ public class Manager extends OfficeWorker {
     /**
      * Prozentsatz des Managers
      */
+    @ParameterName(name = "Prozentsatz")
     private double percentage = -1;
 
     @EmployeeDialogCreatable(parameterNames = {"Name", "ID", "Festgehalt", "Prozentsatz"})
     public Manager(String name, int id, double festgehalt, double prozentsatz) {
         super(name, id, festgehalt);
         setPercentage(prozentsatz);
+    }
+
+    public Manager() {
+        super();
     }
 
     // Hier habe ich eine andere L�sung gew�hlt. Statt einer eigenen setID-Methode
@@ -74,18 +82,18 @@ public class Manager extends OfficeWorker {
     }
 
 
-    @Override
-    protected String getCSVString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getCSVString(this));
-        sb.append(COLUMN_DELIMITER);
-        sb.append(getCSVString(getName()));
-        sb.append(COLUMN_DELIMITER);
-        sb.append(getCSVString(getId()));
-        sb.append(COLUMN_DELIMITER);
-        sb.append(getCSVString(fixSalary));
-        sb.append(COLUMN_DELIMITER);
-        sb.append(getCSVString(percentage));
-        return sb.toString();
-    }
+//    @Override
+//    public String getCSVString() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(getCSVString(this));
+//        sb.append(COLUMN_DELIMITER);
+//        sb.append(getCSVString(getName()));
+//        sb.append(COLUMN_DELIMITER);
+//        sb.append(getCSVString(getId()));
+//        sb.append(COLUMN_DELIMITER);
+//        sb.append(getCSVString(fixSalary));
+//        sb.append(COLUMN_DELIMITER);
+//        sb.append(getCSVString(percentage));
+//        return sb.toString();
+//    }
 }

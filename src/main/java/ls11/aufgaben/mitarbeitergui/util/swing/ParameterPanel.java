@@ -34,6 +34,8 @@ public class ParameterPanel extends JPanel {
         if (parameterType == null || parameterType.isEmpty()) return null;
         if (parameterType.equalsIgnoreCase(String.class.getName()))
             return textValue;
+        if (parameterType.equalsIgnoreCase(Character.class.getName()) || parameterType.equalsIgnoreCase("CHAR"))
+            return textValue.charAt(0);
         if (parameterType.equalsIgnoreCase(Integer.class.getName()) || parameterType.equalsIgnoreCase("INT"))
             try {
                 return Integer.parseInt(textValue);
@@ -47,5 +49,11 @@ public class ParameterPanel extends JPanel {
                 return 0d;
             }
         throw new RuntimeException("Achtung, der Parametertyp " + parameterType + " wird noch nicht unterstützt.");
+    }
+
+    public void clearInput() {
+        if (textField == null) return;
+        textField.setText("");
+        repaint();
     }
 }

@@ -1,6 +1,11 @@
-package ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.employee;
+package ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.employee;
 
-import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.util.MitarbeiterType;
+import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.util.MitarbeiterType;
+import ls11.aufgaben.mitarbeitergui.util.annotations.ParameterName;
+import ls11.aufgaben.mitarbeitergui.util.csv.CSVDataHandler;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
 
 
 /*
@@ -26,7 +31,9 @@ import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.util.MitarbeiterTy
 
 public abstract class Employee {
     public static final String COLUMN_DELIMITER = ";";
+    @ParameterName(name = "ID")
     protected int id;
+    @ParameterName(name = "Name")
     protected String name;
 
     /**
@@ -112,23 +119,49 @@ public abstract class Employee {
         return false;
     }
 
-    protected String getCSVString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getCSVString(this));
-        sb.append(COLUMN_DELIMITER);
-        sb.append(getCSVString(getName()));
-        sb.append(COLUMN_DELIMITER);
-        sb.append(getCSVString(getId()));
+    public final String getCSVString() {
+        //Einzelne Felder finden
+        Field[] fields = CSVDataHandler.getNonConstantFields(getClass());
+
+        //Späteres Format: [Klasse];[parm1],[parm2],[parm3]...
+
+        //String bauen
+        StringBuilder sb = new StringBuilder(getClass().getName());
+        for (int i = 0; i < fields.length; i++) {
+            sb.append(COLUMN_DELIMITER);
+            boolean shouldBeAccessible = fields[i].isAccessible();
+            fields[i].setAccessible(true);
+            try {
+                sb.append(fields[i].get(this));
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+            fields[i].setAccessible(shouldBeAccessible);
+        }
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(getCSVString(this));
+//        sb.append(COLUMN_DELIMITER);
+//        sb.append(getCSVString(getName()));
+//        sb.append(COLUMN_DELIMITER);
+//        sb.append(getCSVString(getId()));
         return sb.toString();
     }
 
-    protected static <T> String getCSVString(T obj) {
-        return getPackageAndClass(obj) + ":" + obj.toString();
+    public static Employee getEmployeeFromCSVString(String input) throws Exception {
+        if(input == null || input.isEmpty())return null;
+        String[] vals = input.split(COLUMN_DELIMITER);
+        Class<? extends Employee> c = (Class<? extends Employee>) Class.forName(vals[0]);
+        vals = Arrays.copyOfRange(vals, 1, vals.length);
+        return CSVDataHandler.getFilledObject(c, vals);
     }
 
-    protected static <T> String getPackageAndClass(T obj) {
-        if (obj == null) throw new IllegalArgumentException("Objekt kann nicht ermittelt werden");
-        Class<?> clazz = obj.getClass();
-        return clazz.getName();
-    }
+//    protected static <T> String getCSVString(T obj) {
+//        return getPackageAndClass(obj) + ":" + obj.toString();
+//    }
+//
+//    protected static <T> String getPackageAndClass(T obj) {
+//        if (obj == null) throw new IllegalArgumentException("Objekt kann nicht ermittelt werden");
+//        Class<?> clazz = obj.getClass();
+//        return clazz.getName();
+//    }
 }

@@ -1,4 +1,4 @@
-package ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.util;
+package ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.util;
 
 /**
  * Eine Auflistung aller typen von Mitarbeitern

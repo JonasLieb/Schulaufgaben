@@ -1,12 +1,11 @@
-package ls11.aufgaben.mitarbeitergui.util.swing;
-
+package ls11.aufgaben.mitarbeitergui.util.annotations;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.CONSTRUCTOR)
-public @interface EmployeeDialogCreatable {
-    public String[] parameterNames();
+@Target(ElementType.TYPE)
+public @interface ClassName {
+    String name() default "";
 }

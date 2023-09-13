@@ -1,10 +1,13 @@
-package ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.employee;
+package ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.employee;
 
 
-import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.util.MitarbeiterType;
-import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.util.exceptions.MissingArgumentException;
-import ls11.aufgaben.mitarbeitergui.util.swing.EmployeeDialogCreatable;
+import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.util.MitarbeiterType;
+import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.util.exceptions.MissingArgumentException;
+import ls11.aufgaben.mitarbeitergui.util.annotations.ClassName;
+import ls11.aufgaben.mitarbeitergui.util.annotations.EmployeeDialogCreatable;
+import ls11.aufgaben.mitarbeitergui.util.annotations.ParameterName;
 
+@ClassName(name = "Schichtarbeiter")
 public class ShiftWorker extends Employee {
     /**
      * Unteres Limit des zul�ssigen ID-Bereichs
@@ -17,10 +20,12 @@ public class ShiftWorker extends Employee {
     /**
      * Stundensatz des Arbeiters
      */
+    @ParameterName(name = "Stundensatz")
     private double hourlyRate;
     /**
      * Anzahl der bisher abgeleisteten Stunden
      */
+    @ParameterName(name = "Stundenzahl")
     private int hourCount;
 
     @EmployeeDialogCreatable(parameterNames = {"Name", "ID", "Stundensatz"})
@@ -28,6 +33,9 @@ public class ShiftWorker extends Employee {
         setName(name);
         setHourlyRate(hourlyRate);
         setId(id);
+    }
+    public ShiftWorker(){
+        super();
     }
 
     protected void setHourCount(int hourCount) {
@@ -91,16 +99,16 @@ public class ShiftWorker extends Employee {
         return MAX_ID;
     }
 
-    @Override
-    protected String getCSVString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getCSVString(this));
-        sb.append(COLUMN_DELIMITER);
-        sb.append(getCSVString(getName()));
-        sb.append(COLUMN_DELIMITER);
-        sb.append(getCSVString(getId()));
-        sb.append(COLUMN_DELIMITER);
-        sb.append(getCSVString(hourlyRate));
-        return sb.toString();
-    }
+//    @Override
+//    public String getCSVString() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(getCSVString(this));
+//        sb.append(COLUMN_DELIMITER);
+//        sb.append(getCSVString(getName()));
+//        sb.append(COLUMN_DELIMITER);
+//        sb.append(getCSVString(getId()));
+//        sb.append(COLUMN_DELIMITER);
+//        sb.append(getCSVString(hourlyRate));
+//        return sb.toString();
+//    }
 }

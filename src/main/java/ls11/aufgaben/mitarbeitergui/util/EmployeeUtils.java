@@ -1,7 +1,6 @@
 package ls11.aufgaben.mitarbeitergui.util;
 
-import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.employee.Employee;
-import ls11.aufgaben.mitarbeitergui.util.swing.EmployeeTable;
+import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.employee.Employee;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;

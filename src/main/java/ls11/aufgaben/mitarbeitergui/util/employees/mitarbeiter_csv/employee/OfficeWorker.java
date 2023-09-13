@@ -1,8 +1,11 @@
-package ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.employee;
+package ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.employee;
 
-import ls11.aufgaben.mitarbeitergui.employees.mitarbeiter_csv.util.MitarbeiterType;
-import ls11.aufgaben.mitarbeitergui.util.swing.EmployeeDialogCreatable;
+import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.util.MitarbeiterType;
+import ls11.aufgaben.mitarbeitergui.util.annotations.ClassName;
+import ls11.aufgaben.mitarbeitergui.util.annotations.EmployeeDialogCreatable;
+import ls11.aufgaben.mitarbeitergui.util.annotations.ParameterName;
 
+@ClassName(name = "Büroarbeiter")
 public class OfficeWorker extends Employee {
     // Laut der Regel "muss mit 5 beginnen" w�re hier auch MIN_ID = 5000 m�glich. Da
     // aber die IDs der Manager mit 50 anfangen und somit 5000 bis 5099 abdecken
@@ -22,6 +25,7 @@ public class OfficeWorker extends Employee {
     /**
      * Festgehalt des B�roarbeiters
      */
+    @ParameterName(name = "Festgehalt")
     protected double fixSalary = -1;
 
     @EmployeeDialogCreatable(parameterNames = {"Name", "ID", "Festgehalt"})
@@ -29,6 +33,9 @@ public class OfficeWorker extends Employee {
         setName(name);
         setFestgehalt(festgehalt);
         setId(id);
+    }
+    public OfficeWorker(){
+        super();
     }
 
     protected void setFestgehalt(double festgehalt) {
@@ -78,16 +85,16 @@ public class OfficeWorker extends Employee {
         return MAX_ID;
     }
 
-    @Override
-    protected String getCSVString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getCSVString(this));
-        sb.append(COLUMN_DELIMITER);
-        sb.append(getCSVString(getName()));
-        sb.append(COLUMN_DELIMITER);
-        sb.append(getCSVString(getId()));
-        sb.append(COLUMN_DELIMITER);
-        sb.append(getCSVString(fixSalary));
-        return sb.toString();
-    }
+//    @Override
+//    public String getCSVString() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(getCSVString(this));
+//        sb.append(COLUMN_DELIMITER);
+//        sb.append(getCSVString(getName()));
+//        sb.append(COLUMN_DELIMITER);
+//        sb.append(getCSVString(getId()));
+//        sb.append(COLUMN_DELIMITER);
+//        sb.append(getCSVString(fixSalary));
+//        return sb.toString();
+//    }
 }
