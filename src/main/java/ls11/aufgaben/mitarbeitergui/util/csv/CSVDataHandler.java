@@ -1,6 +1,6 @@
 package ls11.aufgaben.mitarbeitergui.util.csv;
 
-import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.mobility.util.DrivingLicense;
+import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.mobility.util.DrivingLicense;
 
 import java.lang.reflect.*;
 import java.util.Arrays;

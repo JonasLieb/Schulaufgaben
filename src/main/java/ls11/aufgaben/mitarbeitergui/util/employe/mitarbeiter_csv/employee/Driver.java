@@ -1,9 +1,9 @@
-package ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.employee;
+package ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.employee;
 
 
-import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.mobility.util.DrivingLicense;
-import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.mobility.util.GPSPosition;
-import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.mobility.util.Vehicle;
+import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.mobility.util.DrivingLicense;
+import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.mobility.util.GPSPosition;
+import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.mobility.util.Vehicle;
 import ls11.aufgaben.mitarbeitergui.util.annotations.ClassName;
 import ls11.aufgaben.mitarbeitergui.util.annotations.EmployeeDialogCreatable;
 import ls11.aufgaben.mitarbeitergui.util.annotations.ParameterName;

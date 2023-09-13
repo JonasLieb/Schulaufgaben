@@ -1,7 +1,7 @@
-package ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.employee;
+package ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.employee;
 
-import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.util.MitarbeiterType;
-import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.util.exceptions.MissingArgumentException;
+import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.util.MitarbeiterType;
+import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.util.exceptions.MissingArgumentException;
 import ls11.aufgaben.mitarbeitergui.util.annotations.ClassName;
 import ls11.aufgaben.mitarbeitergui.util.annotations.EmployeeDialogCreatable;
 import ls11.aufgaben.mitarbeitergui.util.annotations.ParameterName;

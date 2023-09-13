@@ -1,8 +1,8 @@
-package ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.mobility;
+package ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.mobility;
 
 
-import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.mobility.util.Vehicle;
-import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.mobility.util.VehicleType;
+import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.mobility.util.Vehicle;
+import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.mobility.util.VehicleType;
 
 public class Truck extends Vehicle {
 

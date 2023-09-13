@@ -1,6 +1,6 @@
-package ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.employee;
+package ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.employee;
 
-import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.util.MitarbeiterType;
+import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.util.MitarbeiterType;
 import ls11.aufgaben.mitarbeitergui.util.annotations.ParameterName;
 import ls11.aufgaben.mitarbeitergui.util.csv.CSVDataHandler;
 
@@ -138,12 +138,6 @@ public abstract class Employee {
             }
             fields[i].setAccessible(shouldBeAccessible);
         }
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(getCSVString(this));
-//        sb.append(COLUMN_DELIMITER);
-//        sb.append(getCSVString(getName()));
-//        sb.append(COLUMN_DELIMITER);
-//        sb.append(getCSVString(getId()));
         return sb.toString();
     }
 
@@ -154,14 +148,4 @@ public abstract class Employee {
         vals = Arrays.copyOfRange(vals, 1, vals.length);
         return CSVDataHandler.getFilledObject(c, vals);
     }
-
-//    protected static <T> String getCSVString(T obj) {
-//        return getPackageAndClass(obj) + ":" + obj.toString();
-//    }
-//
-//    protected static <T> String getPackageAndClass(T obj) {
-//        if (obj == null) throw new IllegalArgumentException("Objekt kann nicht ermittelt werden");
-//        Class<?> clazz = obj.getClass();
-//        return clazz.getName();
-//    }
 }

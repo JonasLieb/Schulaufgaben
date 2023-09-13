@@ -1,4 +1,4 @@
-package ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.mobility.util;
+package ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.mobility.util;
 
 public class VehicleType {
 	public static final VehicleType PASSENGER_CAR = new VehicleType('B', 'D');

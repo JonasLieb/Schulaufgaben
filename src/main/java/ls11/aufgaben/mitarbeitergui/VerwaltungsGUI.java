@@ -1,7 +1,7 @@
 package ls11.aufgaben.mitarbeitergui;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import ls11.aufgaben.mitarbeitergui.util.employees.mitarbeiter_csv.employee.*;
+import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.employee.*;
 import ls11.aufgaben.mitarbeitergui.util.swing.CreateEmployeeDialog;
 import ls11.aufgaben.mitarbeitergui.util.swing.EmployeeTable;
 import ls11.aufgaben.mitarbeitergui.util.swing.ImageHandler;
@@ -19,9 +19,9 @@ public class VerwaltungsGUI extends JFrame {
     private static final String USER_HOME = System.getProperty("user.home");
     private static final String CSV_FILE_NAME = "employeeData.csv";
     private static final Class<? extends Employee>[] VALID_EMPLOYEES = (Class<? extends Employee>[]) new Class<?>[]{
-            ShiftWorker.class,
-            Manager.class,
             OfficeWorker.class,
+            Manager.class,
+            ShiftWorker.class,
             Driver.class
     };
     private EmployeeManagement management = new EmployeeManagement();
@@ -177,13 +177,15 @@ public class VerwaltungsGUI extends JFrame {
         //Mitarbeiter aus der Tabelle lesen
         Employee[] employees = currentTable.getSelectedEmployees();
 
-        if (employees != null)
+        if (employees != null && employees.length!=0)
             JOptionPane.showConfirmDialog(this,
                     "Sicher, dass sie diese Mitarbeiter löschen möchten?",
                     "Achtung",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.WARNING_MESSAGE,
                     ImageHandler.getInstance().getIcon("RemoveEmployee.png"));
+        else
+            return;
 
         //Diese Mitarbeiter löschen
         for (Employee empl : employees) removeEmployee(empl);
