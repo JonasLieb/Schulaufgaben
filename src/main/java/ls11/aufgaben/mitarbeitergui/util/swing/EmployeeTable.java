@@ -1,7 +1,7 @@
 package ls11.aufgaben.mitarbeitergui.util.swing;
 
 
-import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.employee.Employee;
+import ls11.aufgaben.mitarbeitergui.util.employee.Employee;
 import ls11.aufgaben.mitarbeitergui.util.EmployeeUtils;
 import ls11.aufgaben.mitarbeitergui.util.annotations.ParameterName;
 

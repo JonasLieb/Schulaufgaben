@@ -1,7 +1,8 @@
 package ls11.aufgaben.mitarbeitergui;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.employee.*;
+import com.formdev.flatlaf.intellijthemes.FlatSpacegrayIJTheme;
+import ls11.aufgaben.mitarbeitergui.util.employee.*;
 import ls11.aufgaben.mitarbeitergui.util.swing.CreateEmployeeDialog;
 import ls11.aufgaben.mitarbeitergui.util.swing.EmployeeTable;
 import ls11.aufgaben.mitarbeitergui.util.swing.ImageHandler;
@@ -61,9 +62,16 @@ public class VerwaltungsGUI extends JFrame {
     }
 
     private void initGUI() {
+        JPanel employeePanel = new JPanel(new BorderLayout());
+        employeePanel.add(getManagePanel(), BorderLayout.WEST);
+        employeePanel.add(getVisualizeEmployeesPanel(), BorderLayout.CENTER);
+
+        JPanel calculationPanel = new JPanel();
+        //TODO
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(getManagePanel(), BorderLayout.WEST);
-        mainPanel.add(getVisualizeEmployeesPanel(), BorderLayout.CENTER);
+
+        mainPanel.add(employeePanel, BorderLayout.CENTER);
+        mainPanel.add(calculationPanel, BorderLayout.SOUTH);
 
         this.add(mainPanel);
         this.setMinimumSize(new Dimension(500, 400));
@@ -221,7 +229,7 @@ public class VerwaltungsGUI extends JFrame {
     private void load() {
         File f = new File(USER_HOME + File.separator + CSV_FILE_NAME);
         if (!f.exists()) {
-            throw new RuntimeException("Datei " + f + " existiert nicht.");
+            JOptionPane.showConfirmDialog(this, "Datei " + f + " existiert incht.","Fehler", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         }
         String[] data;
         try (BufferedReader br = new BufferedReader(new FileReader(f))) {

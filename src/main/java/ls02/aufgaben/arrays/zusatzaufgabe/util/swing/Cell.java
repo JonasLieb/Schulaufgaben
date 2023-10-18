@@ -1,6 +1,6 @@
 package ls02.aufgaben.arrays.zusatzaufgabe.util.swing;
 
-import java.awt.Color;
+import java.awt.*;
 
 import javax.swing.JPanel;
 
@@ -11,12 +11,14 @@ import javax.swing.JPanel;
  */
 public class Cell extends JPanel {
     private static final long serialVersionUID = 1L;
+    private static final int BORDER_WIDTH = 0;
     int posX;
     int posY;
+    private boolean isAlive;
     private static final Color STANDARD_ALIVE_BACKGROUND = Color.GREEN;
     private static final Color STANDARD_DEAD_BACKGROUND = Color.LIGHT_GRAY;
-    private Color alive_background = Color.GREEN;
-    private Color dead_background = Color.WHITE;
+    private Color alive_color = Color.GREEN;
+    private Color dead_color = Color.WHITE;
     private static final int LOWER_LIVING_LIMIT = 2;
     private static final int UPPER_LIVING_LIMIT = 3;
 
@@ -42,8 +44,8 @@ public class Cell extends JPanel {
         this.posX = x;
         this.posY = y;
         this.setToolTipText("X:" + x + " Y: " + y);
-        alive_background = aliveColor;
-        dead_background = deadColor;
+        alive_color = aliveColor;
+        dead_color = deadColor;
         setState(alive);
     }
 
@@ -53,10 +55,8 @@ public class Cell extends JPanel {
      * @param alive the boolean that determins if the cell is alive or dead
      */
     private void setState(boolean alive) {
-        if (alive)
-            setBackground(alive_background);
-        else
-            setBackground(dead_background);
+        isAlive = alive;
+        repaint();
     }
 
     /**
@@ -65,7 +65,7 @@ public class Cell extends JPanel {
      * @return if the cell is alive
      */
     public boolean isAlive() {
-        return getBackground().equals(alive_background);
+        return isAlive;
     }
 
     /**
@@ -123,5 +123,24 @@ public class Cell extends JPanel {
             }
         }
         return count;
+    }
+
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+
+        //Hintergrund
+        if (isAlive) g.setColor(alive_color);
+        else g.setColor(dead_color);
+        g.fillRect(0, 0, getWidth(), getHeight());
+
+        //Rahmen
+        g.setColor(Color.LIGHT_GRAY);
+        for (int layer = 0; layer < BORDER_WIDTH; layer++) {
+            g.drawRect(layer, layer, getWidth() - (2 * layer), getHeight() - (2 * layer));
+        }
+
+
     }
 }

@@ -1,8 +1,8 @@
 package ls11.aufgaben.mitarbeitergui;
 
 
-import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.employee.Employee;
-import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.employee.ShiftWorker;
+import ls11.aufgaben.mitarbeitergui.util.employee.Employee;
+import ls11.aufgaben.mitarbeitergui.util.employee.ShiftWorker;
 
 import java.util.ArrayList;
 

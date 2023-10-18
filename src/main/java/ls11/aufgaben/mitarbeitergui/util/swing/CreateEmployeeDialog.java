@@ -2,7 +2,7 @@ package ls11.aufgaben.mitarbeitergui.util.swing;
 
 
 import ls11.aufgaben.mitarbeitergui.VerwaltungsGUI;
-import ls11.aufgaben.mitarbeitergui.util.employe.mitarbeiter_csv.employee.Employee;
+import ls11.aufgaben.mitarbeitergui.util.employee.Employee;
 import ls11.aufgaben.mitarbeitergui.util.annotations.ClassNameUtils;
 import ls11.aufgaben.mitarbeitergui.util.annotations.EmployeeDialogCreatable;
 import ls11.aufgaben.mitarbeitergui.util.annotations.EmployeeDialogCreatableUtils;
